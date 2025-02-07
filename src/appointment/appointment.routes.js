@@ -1,9 +1,13 @@
 import { Router } from "express";
-import { saveAppointment } from "./appointment.controller.js";
-import { createAppointmentValidator } from "../middlewares/appointment-validators.js";
+import { saveAppointment, updateAppointment, getApointment } from "./appointment.controller.js";
+import { createAppointmentValidator, updateAppoinmentValidator } from "../middlewares/appointment-validators.js";
 
 const router = Router();
 
 router.post("/createAppointment", createAppointmentValidator, saveAppointment);
+
+router.get("/", getApointment);
+
+router.put("/updateAppintment/:id", updateAppoinmentValidator, updateAppointment); 
 
 export default router;

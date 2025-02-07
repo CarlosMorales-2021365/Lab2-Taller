@@ -56,3 +56,56 @@ export const saveAppointment = async (req, res) => {
     }); 
   }
 };
+
+export const getApointment = async (req, res) => {
+    try{
+      const { limite = 5, desde = 0 } = req.query
+      const query = { status: CREATED}
+
+      const [total, appointment ]= await Promise.all([
+        appointment.countDocuments(query),
+        appointment.find(query)
+                  .skip(Number(desde))
+                  .limit(Number(limite))
+      ])
+
+      return res.status(200).json({
+        success: true,
+        total,
+        users
+      })
+    }catch(err){
+      return res.status(500).json({
+        success: false,
+        message: "Error al obtener las citas",
+        error: err.message
+      })
+    }
+};
+
+export const updateStatus = async (req, res)=>{
+  try{
+
+  }catch(err){}
+}
+
+export const updateAppointment = async (req,res) => {
+  try{ 
+    const { id } = req.params;
+    const data = req.body;
+
+    const appointment = await Appointment.findByIdAndUpdate(id, data, {new: true});
+
+    res.status(200).json({
+      success: true,
+      msg: 'Cita Actualizada',
+      appointment
+    })
+  }catch(err){
+    res.status(500).json({
+      success: false,
+      msg: "Error al actualizar la cita",
+      error: err.message
+    });
+  }
+}
