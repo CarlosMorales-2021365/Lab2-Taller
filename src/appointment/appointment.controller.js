@@ -2,6 +2,7 @@ import Pet from "../pet/pet.model.js";
 import Appointment from "../appointment/appointment.model.js";
 import { parse } from "date-fns";
 import User from "../user/user.model.js"
+import { hash } from "bcrypt";
 
 export const saveAppointment = async (req, res) => {
   try {
@@ -84,6 +85,37 @@ export const getApointment = async (req, res) => {
       })
     }
 };
+
+export const cancelAppointment = async (req, res) => {
+  try{
+    const { id } = req.params
+
+    const appointment = await Appointment.findById(id);
+
+    if (!appointment){
+      res.status(404).json({
+        success: false,
+        msg: "Cita no encontrada"
+      });
+    }
+  
+    appointment.status = "CANCELLED";
+    await appointment.save();
+    
+    return res.status(200).json({
+      success: true,
+      message: "Cita cancelada",
+      appointment
+    })
+  }catch(err){
+    res.status(500).json({
+      success: false,
+      msg: "Error al cancelar la cita",
+      error: err.message
+    });
+  }
+  
+}
 
 export const updateAppointment = async (req,res) => {
   try{ 
