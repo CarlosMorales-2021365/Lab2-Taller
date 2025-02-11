@@ -78,6 +78,16 @@ JWT_SECRET=<tu_secreto_jwt>
       "surname": "string"
     }
     ```
+- **Actualizar foto de perfil del Usuario**
+  - **URL:** `/adoptionSystem/v1/user/updateProfilePicture/:uid`
+  - **Método:** `PATCH`
+  - **Cuerpo:**
+    ```json
+    {
+      "profilePicture": "file"
+    }
+    ```
+    
 
 ### Mascotas
 
@@ -120,6 +130,34 @@ JWT_SECRET=<tu_secreto_jwt>
       "user": "string"
     }
     ```
+
+- **Actualizar Cita**
+  - **URL:** `/adoptionSystem/v1/appointment/updateAppintment/:uid`
+  - **Método:** `PUT`
+  - **Cuerpo:**
+    ```json
+    {
+      "date": "2023-10-15T10:00:00Z",
+      "pet": "string",
+      "user": "string"
+    }
+    ```
+
+- **Listar Citas por Usuario**
+  - **URL:** `/adoptionSystem/v1/appointment/:uid`
+  - **Método:** `GET`
+
+ 
+- **Cancelar Cita**
+  - **URL:** `/adoptionSystem/v1/appointment/cancelAppointment/:id`
+  - **Método:** `PATCH`
+  - **Cuerpo:**
+    ```json
+    {
+    "status":"CANCELLED"
+    }
+    ```
+  
 
 ## Funcionalidades Adicionales
 
