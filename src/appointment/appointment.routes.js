@@ -8,6 +8,6 @@ router.post("/createAppointment", createAppointmentValidator, saveAppointment);
 
 router.get("/:uid", getApointment);
 
-router.put("/updateAppintment/:id", updateAppoinmentValidator, updateAppointment); 
+router.put("/updateAppintment/:uid", updateAppoinmentValidator, updateAppointment); 
 
 export default router;

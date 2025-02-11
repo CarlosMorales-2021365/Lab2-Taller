@@ -1,6 +1,7 @@
 import Pet from "../pet/pet.model.js";
 import Appointment from "../appointment/appointment.model.js";
 import { parse } from "date-fns";
+import User from "../user/user.model.js"
 
 export const saveAppointment = async (req, res) => {
   try {
@@ -61,7 +62,7 @@ export const getApointment = async (req, res) => {
     try{
       const { uid } = req.params;
       const { limite = 5, desde = 0 } = req.query
-      const query = { appointment: uid, status: "CREATED"}
+      const query = { user: uid, status: "CREATED"}
 
       const [total, appointment ]= await Promise.all([
         Appointment.countDocuments(query),
@@ -84,12 +85,6 @@ export const getApointment = async (req, res) => {
     }
 };
 
-export const updateStatus = async (req, res)=>{
-  try{
-
-  }catch(err){}
-}
-
 export const updateAppointment = async (req,res) => {
   try{ 
     const { id } = req.params;
@@ -109,4 +104,4 @@ export const updateAppointment = async (req,res) => {
       error: err.message
     });
   }
-}
+};
